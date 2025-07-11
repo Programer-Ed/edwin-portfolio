@@ -51,7 +51,6 @@ Built with:
 | ------------------------------------- | ----------------------------------- |
 | ![Homepage](screenshots/hero.png) | ![Chatbot](screenshots/ai.png) |
 
-*Add your screenshots to a `/screenshots/` folder and update these paths.*
 
 ---
 
