@@ -49,7 +49,7 @@ Built with:
 
 | Homepage                              | Chatbot                             |
 | ------------------------------------- | ----------------------------------- |
-| ![Homepage](public/screenshots/hero.png) | ![Chatbot](public/screenshots/ai.png) |
+| ![Homepage](screenshots/hero.png) | ![Chatbot](screenshots/ai.png) |
 
 *Add your screenshots to a `/screenshots/` folder and update these paths.*
 

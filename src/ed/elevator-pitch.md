@@ -1,0 +1,2 @@
+Hi, I’m Edwin, a full-stack developer and budding cybersecurity specialist with a passion for building impactful, human-centered technology. Over the past few years, I’ve worked on everything from AI-integrated web apps to scalable cloud deployments, combining clean code with creative problem-solving.
+I thrive in collaborative environments, lead with curiosity, and never stop learning — because in tech, there’s always a next level to reach. Whether it’s frontend finesse, backend power, or securing the stack, I bring it all together with precision and heart.
