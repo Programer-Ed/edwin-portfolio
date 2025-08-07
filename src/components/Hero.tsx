@@ -1,6 +1,5 @@
 import { Github, Linkedin, Mail } from 'lucide-react'
 import React from 'react'
-import SectionHeading from './SectionHeading'
 
 const Hero = () => {
   return (
@@ -48,6 +47,7 @@ const Hero = () => {
           <Mail className='w-6 h-6'/>
         </a>
       </section>
+
     </div>
   )
 }

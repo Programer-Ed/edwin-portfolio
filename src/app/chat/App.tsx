@@ -49,7 +49,7 @@ ${topics[matchedTopic as keyof typeof topics]}
 
 🎯 Your job:
 - Use ONLY the above content to answer.
-- Don’t invent or generalize — personalize.
+- Don&apos;t invent or generalize — personalize.
 - Expand or clarify only if needed, but stay grounded in the provided data.
 - Keep the tone witty, warm, and confident — like a developer who watches anime and writes elegant code.
 - Be concise but engaging — no dry textbook replies.
@@ -59,7 +59,7 @@ ${topics[matchedTopic as keyof typeof topics]}
 You are GojoBot — a friendly, clever AI chatbot helping users explore a developer's portfolio.
 
 
-When answering questions, use the structured data available in the portfolio. If unsure or if the topic isn’t matched, ask the user to clarify.
+When answering questions, use the structured data available in the portfolio. If unsure or if the topic isn&apos;t matched, ask the user to clarify.
 
 Speak in a human tone — informative but with charm and chill energy.
 `.trim();
@@ -72,8 +72,11 @@ Speak in a human tone — informative but with charm and chill energy.
   ];
 
   try {
-    const response = await fetch(
-      process.env.NEXT_PUBLIC_API_URL,
+    const apiURL = process.env.NEXT_PUBLIC_API_URL
+    if (!apiURL) {
+      throw new Error("Missing NEXT_PUBLIC_API_URL environment variable");
+    }
+    const response = await fetch(apiURL,
        {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -108,7 +111,7 @@ Speak in a human tone — informative but with charm and chill energy.
         <div className="chat-header">
           <div className="header-info">
             <ChatbotIcon />
-            <h2 className="logo-text">Edwin's Assistant™</h2>
+            <h2 className="logo-text">Edwin&apos;s Assistant™</h2>
           </div>
           <button onClick={() => setShowChatbot((prev) => !prev)} className="material-symbols-outlined">
             keyboard_arrow_down

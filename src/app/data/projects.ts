@@ -1,6 +1,4 @@
-import Image from "next/image"; 
- 
- export interface Project {
+export interface Project {
   title: string;
 // tag: string;
   description: string;

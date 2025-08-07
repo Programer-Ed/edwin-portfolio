@@ -19,7 +19,8 @@ import type { FC } from "react";
 type TechStackCardProp ={
   name: string;
   context: string;
-  status?: 'Expert' | 'Proficient' | 'Familiar' | 'Learning';
+  // status?: 'Expert' | 'Proficient' | 'Familiar' | 'Learning';
+  status?: keyof typeof statusColors;
 };
 
 const iconMap: Record<string, FC<{className?: string}>> = {
@@ -71,7 +72,7 @@ const statusColors: Record<string, string> = {
   'Always': 'bg-red-600 text-white',
 };
 
-const TechStackCard = ({ name, context, status, className = '' }: TechStackCardProp) => {
+const TechStackCard = ({ name, context, status,}: TechStackCardProp) => {
   const Icon = iconMap[name] || BiServer;
   let badge = 'bg-gray-400 text-white';
   if (status && statusColors[status]) {

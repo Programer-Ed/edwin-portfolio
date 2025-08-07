@@ -55,7 +55,7 @@ const Contact = () => {
     <div id='contact'>
       <section className="text-center px-4 sm:px-6 py-12">
         <h2 className="text-3xl sm:text-4xl font-bold text-cyan-500 dark:text-cyan-400 mb-3">
-          Let's Connect
+          Let&apos;s Connect
         </h2>
         <p className="text-muted-foreground max-w-2xl mx-auto text-sm sm:text-base">
           Have a project or just want to say hi? Drop me a message!
