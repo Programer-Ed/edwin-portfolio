@@ -31,8 +31,13 @@ export default function RootLayout({
       <head>
           <link rel="icon" type="image/svg+xml" href="/images/animation.png" />
           <link
+            rel="preload"
+            as="style"
+            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,1,0&display=swap"
+          />
+          <link
             rel="stylesheet"
-            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,1,0&display=optional"
+            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,1,0&display=swap"
           />
       </head>
       <body
