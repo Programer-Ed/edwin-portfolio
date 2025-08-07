@@ -7,7 +7,7 @@
 
 👋 Welcome to my developer portfolio!
 This project showcases my skills, creativity, and passion for building modern, scalable, and delightful software.
-Check it out live: [🔗 *Your Live Link Here*](https://your-portfolio-link.com)
+Check it out live: [🔗 *Your Live Link Here*](edwin-portfolio-tau.vercel.app)
 
 ---
 
