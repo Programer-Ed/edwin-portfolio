@@ -14,14 +14,14 @@ import Image from "next/image";
 
  const projects: Project[] = [
 {
-    title: "MovieBox",
+    title: "Moodie",
     // tag: "mb",
     description: "A movie discovery app using the TMDB API. Search, view details, and save favorites. Built with React and styled with Tailwind.",
     thumbnail: "moviebox.png",
     theme: "rose",
     type: "absolute",
-    sourceUrl: "https://github.com/Programer-Ed/Bingebox",
-    liveUrl: "https://bingeboxmovies.vercel.app/",
+    sourceUrl: "https://github.com/Programer-Ed/moodie",
+    liveUrl: "https://moodie-beryl.vercel.app/",
   },
   {
     title: "Recipe App",

@@ -1,131 +1,165 @@
-import { appendClientMessage, createDataStream, smoothStream, streamText } from "ai"
-import { generateUUID } from "@/lib/utils"
-import { myProvider } from "@/lib/ai/providers"
-import { postRequestBodySchema, type PostRequestBody } from "./schema"
-import { createResumableStreamContext, type ResumableStreamContext } from "resumable-stream"
-import { after } from "next/server"
-import { getTopicNamesTool, readAboutEdwinTool } from "@/lib/ai/tools/ed-google-files"
+import { GoogleGenerativeAI } from "@google/generative-ai";
+import { NextRequest } from "next/server";
+import { SYSTEM_PROMPT } from "@/config/prompt"; 
+import { skillsData } from "@/app/data/loaders/skillsData";
 
-export const maxDuration = 60
+const genAI = new GoogleGenerativeAI(process.env.NEXT_PUBLIC_GOOGLE_GENERATIVE_AI_API_KEY!);
 
-let globalStreamContext: ResumableStreamContext | null = null
-
-function getStreamContext() {
-  if (!globalStreamContext) {
-    try {
-      globalStreamContext = createResumableStreamContext({
-        waitUntil: after,
-      })
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } catch (error: any) {
-      if (error.message.includes("REDIS_URL")) {
-        console.log(" > Resumable streams are disabled due to missing REDIS_URL")
-      } else {
-        console.error(error)
-      }
-    }
-  }
-
-  return globalStreamContext
-}
-
-export async function POST(request: Request) {
-  let requestBody: PostRequestBody
-
+export async function POST(req: NextRequest) {
   try {
-    const json = await request.json()
-    requestBody = postRequestBodySchema.parse(json)
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  } catch (_) {
-    return new Response("Invalid request body", { status: 400 })
-  }
-
-  try {
-    const { message, selectedChatModel } = requestBody
-
-    // Extract the content from the message object
-    const messageContent = typeof message === "string" ? message : message.content
-
-    const messages = appendClientMessage({
-      messages: [],
-      message,
-    })
-
-    const streamId = generateUUID()
-
-    const stream = createDataStream({
-      execute: async (dataStream) => {
-        try {
-          // Skip chaining for reasoning model
-          if (selectedChatModel === "chat-model-reasoning") {
-            const result = streamText({
-              model: myProvider.languageModel(selectedChatModel),
-              system: `
-              - You are an AI assistant that helps answer questions about Edwin(Edwin), in his portfolio website.
-              `,
-              messages,
-              maxSteps: 5,
-              experimental_activeTools: [],
-              experimental_transform: smoothStream({ chunking: "word" }),
-              experimental_generateMessageId: generateUUID,
-            })
-
-            result.consumeStream()
-            result.mergeIntoDataStream(dataStream, {
-              sendReasoning: true,
-            })
-            return
-          }
-
-          // Use a single streamText call with all tools and let the AI handle the chaining
-          const result = streamText({
-            model: myProvider.languageModel(selectedChatModel),
-            system: `You are an AI assistant that helps answer questions about Edwin(Edwin), in his portfolio website.
-
-              Your process should be:
-              1. First, use the getTopicNames tool to see what topics are available
-              2. Based on the user's query "${messageContent}", select the most relevant topic
-              3. Then use the readAboutSid tool with that selected topic to get detailed information
-              4. Finally, use that information to provide a comprehensive answer to the user's question
-
-              User's question: "${messageContent}"
-
-              Follow the 3-step process above to provide the best possible answer.`,
-            messages,
-            tools: {
-              getTopicNamesTool,
-              readAboutEdwinTool,
-            },
-            maxSteps: 10, // Allow multiple steps for the chaining
-            experimental_transform: smoothStream({ chunking: "word" }),
-            experimental_generateMessageId: generateUUID,
-          })
-
-          result.consumeStream()
-          result.mergeIntoDataStream(dataStream, {
-            sendReasoning: true,
-          })
-        } catch (error) {
-          console.error("Error in agent chaining:", error)
-        }
-      },
-      onError: (error) => {
-        console.error("Error in stream execution:", error)
-        return "Oops, an error occurred!"
-      },
-    })
-
-    const streamContext = getStreamContext()
-
-    if (streamContext) {
-      return new Response(await streamContext.resumableStream(streamId, () => stream))
-    } else {
-      return new Response(stream)
+    const { prompt } = await req.json();
+    if (!prompt) {
+      return new Response(
+        JSON.stringify({ error: "Prompt is missing." }),
+        { status: 400 }
+      );
     }
-  } catch (error) {
-    console.error(error)
-    return new Response("An error occurred while processing your request!", {
+    const skills = await skillsData();
+    const projectContext = `\n\nMy skills include:\n${skills.join(", ")}`;
+
+    const model = genAI.getGenerativeModel({
+      model: "models/gemini-1.5-flash",
+      generationConfig: {
+        temperature: 0.7,
+        topK: 1,
+        topP: 1,
+        maxOutputTokens: 2048,
+      },
+    });
+
+    // Compose final prompt with embedded system instructions
+    const finalPrompt = `${SYSTEM_PROMPT.trim()}\n\n${prompt}`;
+
+    const result = await model.generateContent({
+      contents: [
+        {
+          role: "user",
+          parts: [{ text: finalPrompt }],
+        },
+      ],
+    });
+
+    const response =
+      result.response.candidates?.[0]?.content?.parts?.[0]?.text ||
+      "Hmm... I didn’t quite catch that. Try again?";
+
+    return new Response(JSON.stringify({ role: "assistant", content: response }), {
+      headers: { "Content-Type": "application/json" },
+    });
+
+  } catch (err: any) {
+    console.error("Gemini API Error:", err.message);
+    return new Response(JSON.stringify({ error: "Internal Server Error" }), {
       status: 500,
-    })
+    });
   }
 }
+
+
+// import { GoogleGenerativeAI } from "@google/generative-ai";
+// import { readDataFile } from "@/libs/ai/tools/read-file";
+
+// let skillsData = "";
+// let elevatorData = "";
+// let experienceData = "";
+// let educationData = "";
+
+// async function preloadDataOnce() {
+//   if (!globalThis.loadedData) {
+//     try {
+//       console.log("Loading project files...");
+//       skillsData = await readDataFile("skills.json");
+//       elevatorData = await readDataFile("elevator.txt");
+//       experienceData = await readDataFile("experience.json");
+//       educationData = await readDataFile("education.json");
+
+//       globalThis.loadedData = true;
+//     } catch (err) {
+//       console.error("Error loading data:", err);
+//     }
+//   }
+// }
+
+// const genAI = new GoogleGenerativeAI(process.env.NEXT_PUBLIC_GOOGLE_GENERATIVE_AI_API_KEY!);
+
+// // const SYSTEM_PROMPT = `
+// // You are a helpful AI assistant for a personal dev portfolio site.
+
+// // Answer questions using the site’s context if relevant: anime interests, skills, elevator pitch, education, or experience.
+// // `;
+
+// const SYSTEM_PROMPT = `
+// You are a helpful AI assistant for a personal dev portfolio site.
+
+// Use the following data to guide your answers when appropriate:
+// Skills: ${skillsData}
+// Elevator Pitch: ${elevatorData}
+// Experience: ${experienceData}
+// Education: ${educationData}
+
+// Always sound like a friendly, confident dev guide.
+
+// Example:
+// User: What are your skills?
+// AI: Sure! Here are some of my core technical skills:
+// ${skillsData}
+
+// User: What's your experience?
+// AI: Let me break it down. Here's my recent work history:
+// ${experienceData}
+
+// Be brief, engaging, and relevant to the portfolio.
+// `;
+
+// async function tryToolResponse(prompt: string) {
+//   const lower = prompt.toLowerCase();
+//   if (lower.includes("anime")) return await readDataFile("anime.json");
+//   if (lower.includes("skills")) return await readDataFile("skills.json");
+//   if (lower.includes("elevator")) return await readDataFile("elevator.txt");
+//   if (lower.includes("education")) return await readDataFile("education.json");
+//   if (lower.includes("experience")) return await readDataFile("experience.json");
+//   return null;
+// }
+
+// export async function POST(req: Request) {
+//     await preloadDataOnce();
+
+//   let body;
+//   try {
+//     body = await req.json();
+//   } catch (err) {
+//     return new Response("Invalid JSON", { status: 400 });
+//   }
+
+//   const messages = body.messages || [];
+//   if (!Array.isArray(messages)) {
+//     return new Response("Expected messages array", { status: 400 });
+//   }
+
+//   const prompt = messages.map((m: any) => `${m.role}: ${m.content}`).join("\n");
+
+//   const toolResult = await tryToolResponse(prompt);
+//   if (toolResult) {
+//     return new Response(JSON.stringify({
+//       role: "assistant",
+//       content: toolResult,
+//     }), {
+//       headers: { "Content-Type": "application/json" },
+//     });
+//   }
+
+//   const finalPrompt = SYSTEM_PROMPT + "\n\n" + prompt;
+//   console.log(finalPrompt)
+//   // const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+//   const model = genAI.getGenerativeModel({ model: "models/gemini-1.5-flash" });
+
+//   const result = await model.generateContent(finalPrompt);
+//   const response = await result.response.text();
+
+//   return new Response(JSON.stringify({
+//     role: "assistant",
+//     content: response,
+//   }), {
+//     headers: { "Content-Type": "application/json" },
+//   });
+// }

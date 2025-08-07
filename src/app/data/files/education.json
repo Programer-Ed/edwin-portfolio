@@ -1,0 +1,26 @@
+{
+  "formalEducation": [
+    {
+      "institution": "Moringa School",
+      "program": "Software Development Bootcamp",
+      "focus": ["Full-Stack Development", "Agile Workflows", "Team Collaboration"]
+    },
+    {
+      "institution": "Harvard (CS50)",
+      "program": "Introduction to Computer Science",
+      "focus": ["Algorithms", "Data Structures", "Software Design"]
+    }
+  ],
+  "certifications": [
+    {
+      "title": "CS50x Certification",
+      "issuer": "HarvardX"
+    }
+  ],
+  "inProgress": [
+    {
+      "institution": "Bachelor of Science (BSc)",
+      "program": "Computer Networks & Cybersecurity"
+    }
+  ]
+}

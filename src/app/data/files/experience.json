@@ -1,0 +1,36 @@
+{
+  "projects": [
+    {
+      "name": "DevJobs Board",
+      "description": "A job board platform tailored for developers, featuring advanced filters and responsive design."
+    },
+    {
+      "name": "Personal Finance Tracker",
+      "description": "A web app for tracking income, expenses, and budgeting goals with insightful analytics."
+    },
+    {
+      "name": "MovieBox",
+      "description": "A movie discovery app powered by TMDB API, built with React and Tailwind CSS."
+    },
+    {
+      "name": "CMS Platform",
+      "description": "A full-fledged content management system using React, Node.js, Express, and MongoDB."
+    },
+    {
+      "name": "Omdena Weather-Based Crop Yield Prediction",
+      "description": "Led the frontend team in building an AI-driven platform integrating Django and predictive models."
+    }
+  ],
+  "roles": [
+    {
+      "title": "Frontend Team Lead",
+      "company": "Omdena",
+      "description": "Managed a distributed team, coordinated with data science, and delivered a user-friendly frontend."
+    },
+    {
+      "title": "Sales Representative",
+      "company": "Fortune Graphics",
+      "description": "Gained valuable experience in client communication and solution-oriented sales."
+    }
+  ]
+}

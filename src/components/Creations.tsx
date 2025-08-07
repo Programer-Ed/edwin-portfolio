@@ -1,25 +1,3 @@
-// import React from 'react'
-// import SectionHeading from './SectionHeading'
-
-// const Creations = () => {
-//   return (
-//     <div>
-//         <section className='mt-6'>
-//             <SectionHeading>The Debug <span className='bg-gradient-to-r 
-//           dark:from-cyan-400 dark:via-purple-500 dark:to-pink-500 
-//           from-blue-700 via-indigo-800 to-purple-800 
-//           bg-clip-text 
-//           text-transparent'>Diaries</span></SectionHeading>
-//           <p className="text-muted-foreground max-w-lg mx-auto">
-//             Each build. A new story. All powered by caffeine & curiosity.
-//           </p>
-//         </section>
-//     </div>
-//   )
-// }
-
-// export default Creations
-
 "use client";
 import { motion } from "framer-motion";
 import projects from "@/app/data/projects";

@@ -1,21 +1,16 @@
 import React from 'react'
 import Navbar from './Navbar'
 import Hero from './Hero'
-
 import Creations from './Creations'
-
 import About from './About'
 import  TechStackSection  from './Skills/TechStackSection'
 import Contact from './Contact'
-import StickyNav from './chat/sticky-nav'
-import { chat } from '@/components/chat2/chat'
-
+import App from '@/app/chat/App'
 
 const HomePage = () => {
   return (
     <div>
-      {/* <Navbar/> */}
-      <StickyNav />
+      {/* <StickyNav/> */}
       <Hero/>
       <About/>
       <TechStackSection/>
@@ -27,7 +22,7 @@ const HomePage = () => {
           </div>
           &copy; {new Date().getFullYear()} Edwin Ng’ang’a. All rights reserved.
         </footer>
-      <chat />
+        <App/>
     </div>
   )
 }

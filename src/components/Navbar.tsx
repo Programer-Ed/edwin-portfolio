@@ -40,7 +40,7 @@ const NavBar = () => {
                 <a href="#README.md" className="w-full hover:text-blue-400">📄 README.md</a>
               </DropdownMenuItem>
               <DropdownMenuItem>
-                <a href="#creations" className="w-full hover:text-blue-400">✨ creations</a>
+                <a href="#projects" className="w-full hover:text-blue-400">✨ creations</a>
               </DropdownMenuItem>
               <DropdownMenuItem>
                 <a href="#contact" className="w-full hover:text-blue-400">💬 Contact</a>
@@ -61,8 +61,8 @@ const NavBar = () => {
 
         <div className="hidden md:flex items-center gap-6">
           <ul className="flex space-x-6 text-sm">
-            <li><a href="#works" className="hover:text-blue-400">📄 README.md</a></li>
-            <li><a href="#works" className="hover:text-blue-400">✨ Creations</a></li>
+            <li><a href="#README.md" className="hover:text-blue-400">📄 README.md</a></li>
+            <li><a href="#projects" className="hover:text-blue-400">✨ Creations</a></li>
             <DropdownMenu>
               <DropdownMenuTrigger className="hover:text-blue-400 text-sm focus:outline-none">
                 More

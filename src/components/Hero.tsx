@@ -6,7 +6,6 @@ const Hero = () => {
   return (
     <div className='pt-20'>
       <h1 className='text-6xl font-bold text-center'>Software 
-        {/* <span className='bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 bg-clip-text text-transparent'>{" "}Engineer</span> */}
         <span className="
           bg-gradient-to-r 
           dark:from-cyan-400 dark:via-purple-500 dark:to-pink-500 

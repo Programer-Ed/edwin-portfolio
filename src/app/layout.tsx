@@ -27,6 +27,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,1,0" /></head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased `}
       >
@@ -38,7 +39,6 @@ export default function RootLayout({
           >
             <main className="min-h-screen transition-colors duration-500 bg-[#d2e2f9] dark:bg-gradient-to-br dark:from-slate-900 dark:via-purple-900 dark:to-slate-900">
               <NavBar/>
-              {/* <div className="px-5 pt-14 mx-auto max-w-3xl"> */}
               <div>
                 {children}
               </div>

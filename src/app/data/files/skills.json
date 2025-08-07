@@ -1,0 +1,14 @@
+{
+  "languages": ["JavaScript", "Python", "PHP", "TypeScript", "SQL"],
+  "frameworks": ["React", "Next.js", "Vue.js", "FastAPI", "Laravel", "Flask", "Django"],
+  "databases": ["PostgreSQL", "MySQL", "MongoDB"],
+  "ui_ux": ["Responsive design", "Accessibility best practices", "User-centered design"],
+  "dev_practices": ["Agile methodologies", "CI/CD", "Code optimization", "Performance tuning"],
+  "other": [
+    "AI integration",
+    "Prompt engineering",
+    "Cloud deployment",
+    "Team leadership",
+    "Open-source collaboration"
+  ]
+}
