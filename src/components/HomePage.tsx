@@ -5,6 +5,7 @@ import About from './About'
 import  TechStackSection  from './Skills/TechStackSection'
 import Contact from './Contact'
 import App from '@/app/chat/App'
+import Graphics from './Graphics'
 
 const HomePage = () => {
   return (
@@ -13,6 +14,7 @@ const HomePage = () => {
       <About/>
       <TechStackSection/>
       <Creations/>
+      <Graphics />
       <Contact/>
       <footer className="w-full text-center py-4 text-sm text-gray-500 dark:text-gray-400">
           <div className="flex justify-center mb-2">

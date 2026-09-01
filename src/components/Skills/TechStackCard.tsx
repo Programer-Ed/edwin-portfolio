@@ -10,10 +10,18 @@ import {
   FaGithub,
   FaDocker,
   FaLock,
-  FaVuejs
+  FaVuejs, 
+  FaPenNib,
+  FaPaintBrush,
 } from "react-icons/fa";
-import { SiMongodb, SiTypescript, SiTailwindcss, SiPrisma, SiSupabase, SiExpress, SiDjango, SiRedis, SiVercel } from "react-icons/si";
+import { SiMongodb, SiTypescript, SiTailwindcss, SiPrisma, SiSupabase, SiExpress, SiDjango, SiRedis, SiVercel, SiCanva,
+  SiFigma, } from "react-icons/si";
 import { BiServer, BiBoltCircle, BiLogoFlask } from "react-icons/bi"; 
+import {
+  MdDesignServices,
+  MdBrandingWatermark,
+  MdSocialDistance,
+} from "react-icons/md";
 import type { FC } from "react";
 
 type TechStackCardProp ={
@@ -43,7 +51,15 @@ const iconMap: Record<string, FC<{className?: string}>> = {
   "GitHub": FaGithub,
   "Vue.js": FaVuejs,
   "Redis": SiRedis,
-  "Vercel AI SDK": SiVercel
+  "Vercel AI SDK": SiVercel,
+  "Photoshop": FaPaintBrush,
+  "Illustrator": FaPenNib,
+  "InDesign": MdDesignServices,
+  "Canva": MdDesignServices,
+  "Figma": SiFigma,
+  "UI/UX Design": MdDesignServices,
+  "Branding": MdBrandingWatermark,
+  "Social Media Design": MdSocialDistance,
 }
 
 const statusColors: Record<string, string> = {

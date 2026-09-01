@@ -17,6 +17,42 @@ const techStack = [
     ],
   },
   {
+  category: "🎨 Graphics & Design",
+  tools: [
+    {
+      name: "Adobe Photoshop",
+      context: "Photo editing, digital graphics, marketing assets",
+      status: "Regular use"
+    },
+    {
+      name: "Adobe Illustrator",
+      context: "Logos, vector graphics, illustrations",
+      status: "Regular use"
+    },
+    {
+      name: "Adobe InDesign",
+      context: "Brochures, posters, publications, print layouts",
+      status: "Used in client projects"
+    },
+    {
+      name: "Canva",
+      context: "Social media graphics, presentations, marketing content",
+      status: "Regular use"
+    },
+    {
+      name: "Figma",
+      context: "UI design, wireframes, prototypes, design systems",
+      status: "Regular use"
+    }
+  ],
+
+  skills: [
+    "UI/UX Design",
+    "Branding",
+    "Social Media Design"
+  ]
+},
+  {
     category: "🧠 Backend",
     tools: [
       { name: "Node.js",
