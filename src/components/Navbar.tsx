@@ -72,7 +72,7 @@ const NavBar = () => {
                 </DropdownMenuItem>
                 <DropdownMenuItem>
                   <Link
-                    href="https://1drv.ms/w/s!Armvp48kcxT4cJhRKtKrRFFJy0Y?e=Q2J4sK"
+                    href="https://1drv.ms/w/c/E6411DD09D5696A6/IQBBrFyyLGtHS75QmELsfxUAAQS_54jQhXmcQ1Z9AZFZeRY?e=6XSAPa"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-full hover:text-blue-400"
