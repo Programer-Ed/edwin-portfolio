@@ -14,7 +14,7 @@ import {
   FaPenNib,
   FaPaintBrush,
 } from "react-icons/fa";
-import { SiMongodb, SiTypescript, SiTailwindcss, SiPrisma, SiSupabase, SiExpress, SiDjango, SiRedis, SiVercel, SiCanva,
+import { SiMongodb, SiTypescript, SiTailwindcss, SiPrisma, SiSupabase, SiExpress, SiDjango, SiRedis, SiVercel,
   SiFigma, } from "react-icons/si";
 import { BiServer, BiBoltCircle, BiLogoFlask } from "react-icons/bi"; 
 import {
