@@ -33,7 +33,7 @@ const Hero = () => {
           <Github className='w-6 h-6'/>
         </a>
         <a 
-          href="https://www.linkedin.com/in/edwinnganga/" 
+          href="https://www.linkedin.com/in/edwin-nganga-dev/" 
           className='p-3 rounded-full bg-gray-100 dark:bg-slate-800/50 
                     transition-all duration-300 ease-in-out 
                     hover:-translate-y-1 hover:bg-blue-100 dark:hover:bg-blue-400/20'>
